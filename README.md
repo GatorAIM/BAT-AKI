@@ -59,19 +59,29 @@ Attention weights are preserved to support downstream interpretability analyses.
 
 ## 3. Repository Structure
 
-```text
-.
-├── masked_ehr_dataset.py      # Masked EHR dataset and masking strategy
-├── downstream_dataset.py      # Inference and downstream datasets
-├── handle_matrix.py           # Ontology and semantic embedding processing
-├── load_data.py               # Data loading utilities
-├── mlm_model.py               # BAT-AKI pretraining model
-├── classifier_model.py        # Downstream classification heads
-├── loss.py                    # Label smoothing and auxiliary losses
-├── lr_scheduler.py            # Transformer warmup learning rate scheduler
-├── evaluation.py              # Training and evaluation utilities
+BAT-AKI/
+├── pretraining.py
+│
+├── model/
+│   ├── mlm_model.py
+│   ├── classifier_model.py
+│   └── loss.py
+│
+├── dataset/
+│   ├── masked_ehr_dataset.py
+│   ├── downstream_dataset.py
+│   └── load_data.py
+│
+├── utils/
+│   ├── handle_matrix.py
+│   ├── evaluation.py
+│   └── lr_scheduler.py
+│
 ├── notebooks/
-│   ├── Step1_Pretrain.ipynb   # Pretraining (MLM + BAP)
-│   ├── Step2_Finetune.ipynb   # Downstream fine-tuning
-│   └── Step3_Attention.ipynb  # Attention visualization
+│   ├── Step1_Pretrain_Proposed.ipynb
+│   ├── Step2_Finetune_Proposed.ipynb
+│   ├── Step3_Baseline.ipynb
+│   └── ATT_visualization.ipynb
+│
+├── requirements.txt
 └── README.md
