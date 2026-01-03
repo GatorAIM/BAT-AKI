@@ -27,7 +27,7 @@ from utils.evaluation import evaluate_loss
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 config = {
-    "file_path": "/path/to/data/",
+    "file_path": "/..",
     "embedding_dim": 128,
     "max_len": 500,
     "batch_size": 128,
@@ -38,6 +38,7 @@ config = {
     "use_mrontology": True,
     "num_ontology": 3000,
     "num_mrontology": 3000,
+    "maxrange": 1000,
 }
 
 # -------------------------------------------------
@@ -108,7 +109,7 @@ loss_fn = nn.CrossEntropyLoss(ignore_index=token2id["[PAD]"])
 # -------------------------------------------------
 # Training loop
 # -------------------------------------------------
-for epoch in range(10):
+for epoch in range(config["maxrange"]):
     model.train()
     for batch in train_loader:
         optimizer.zero_grad()
