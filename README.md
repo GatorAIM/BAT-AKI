@@ -2,66 +2,74 @@
 
 This repository contains the official implementation of **BAT-AKI**, a biomarker-aware transformer framework for early prediction and prognosis of Acute Kidney Injury (AKI) using longitudinal Electronic Health Records (EHRs).
 
-BAT-AKI integrates temporal dynamics, clinical semantics, ontology structures, and biomarker abnormality–aware pretraining to improve both predictive performance and representation interpretability across multiple AKI-related tasks.
+BAT-AKI integrates temporal dynamics, clinical semantics, ontology structures, and biomarker abnormality–aware pretraining to improve predictive performance, robustness, and interpretability across multiple AKI-related tasks.
 
 ---
 
-## 📌 Overview
+## 1. Introduction
 
-BAT-AKI is designed to address key challenges in EHR-based AKI modeling:
+Acute Kidney Injury (AKI) is a common and life-threatening complication among hospitalized patients. Although Electronic Health Records (EHRs) contain rich longitudinal information, their irregular temporal structure and heterogeneous clinical concepts pose challenges for conventional machine learning models.
 
-- Longitudinal, irregularly sampled clinical events
-- Heterogeneous medical concepts (labs, diagnoses, medications)
-- Sensitivity to AKI-related biomarker abnormalities
-- Transferability across institutions
-
-The framework consists of:
-1. A **Transformer-based backbone** with multi-channel embeddings
-2. **Biomarker Abnormality–Aware Pretraining (BAP)** via masked language modeling
-3. Flexible **downstream fine-tuning heads** for multiple AKI prediction tasks
+BAT-AKI is designed to address these challenges by:
+- Modeling long-range temporal dependencies using a Transformer backbone
+- Incorporating structured medical knowledge through ontology-aware embeddings
+- Enhancing sensitivity to biomarker abnormalities via tailored pretraining objectives
+- Supporting flexible downstream fine-tuning across multiple AKI-related tasks
 
 ---
 
-## 🧠 Model Architecture
+## 2. Model Overview
 
-### Input Representation
-Each patient admission is serialized into a token sequence containing:
-- Demographics (e.g., age, sex, race)
-- Time-ordered clinical events
-- Associated metadata:
+### 2.1 Input Representation
+
+Each patient admission is serialized into a token sequence consisting of:
+- Demographic tokens (e.g., age, sex, race)
+- Time-ordered clinical event tokens
+- Associated auxiliary sequences:
   - Time gaps (`delta_t`)
-  - Segment IDs (visit-level)
-  - Module IDs (lab / diagnosis / medication)
-  - Ontology and minor-ontology IDs
-  - Abnormal biomarker flags (optional)
+  - Segment identifiers (`segment_ids`)
+  - Module identifiers (`module_ids`)
+  - Ontology and minor-ontology identifiers
+  - Biomarker abnormality flags (optional)
 
-### Embedding Components
-- **Token Embedding**
-- **Time Embedding** (continuous sinusoidal)
-- **Segment Embedding**
-- **Module Embedding** (optional)
-- **Ontology / Minor Ontology Embedding** (optional)
-- **Semantic Embedding** from prompt-based medical code embeddings (optional)
+All sequences are padded or truncated to a fixed maximum length.
 
-### Backbone
-- Multi-layer Transformer encoder
-- Attention weights preserved for interpretability
+### 2.2 Embedding Components
+
+BAT-AKI supports a modular embedding design, including:
+- Token embeddings
+- Continuous time embeddings (sinusoidal)
+- Segment embeddings
+- Module embeddings (optional)
+- Ontology and minor-ontology embeddings (optional)
+- Semantic embeddings derived from prompt-based medical code representations (optional)
+
+These embeddings are combined and passed to the Transformer encoder.
+
+### 2.3 Transformer Backbone
+
+The backbone consists of multiple custom Transformer encoder layers with:
+- Multi-head self-attention
+- Feedforward networks
+- Residual connections and layer normalization
+
+Attention weights are preserved to support downstream interpretability analyses.
 
 ---
 
-## 📂 Repository Structure
+## 3. Repository Structure
 
 ```text
 .
-├── masked_ehr_dataset.py      # Masked EHR dataset & masking strategy
-├── downstream_dataset.py      # Inference / downstream datasets
-├── handle_matrix.py           # Ontology & semantic embedding processing
+├── masked_ehr_dataset.py      # Masked EHR dataset and masking strategy
+├── downstream_dataset.py      # Inference and downstream datasets
+├── handle_matrix.py           # Ontology and semantic embedding processing
 ├── load_data.py               # Data loading utilities
-├── mlm_model.py               # BAT-AKI pretraining model (MLM + BAP)
+├── mlm_model.py               # BAT-AKI pretraining model
 ├── classifier_model.py        # Downstream classification heads
-├── loss.py                    # Label smoothing & auxiliary losses
-├── lr_scheduler.py            # Transformer warmup LR scheduler
-├── evaluation.py              # Training & evaluation utilities
+├── loss.py                    # Label smoothing and auxiliary losses
+├── lr_scheduler.py            # Transformer warmup learning rate scheduler
+├── evaluation.py              # Training and evaluation utilities
 ├── notebooks/
 │   ├── Step1_Pretrain.ipynb   # Pretraining (MLM + BAP)
 │   ├── Step2_Finetune.ipynb   # Downstream fine-tuning
