@@ -58,7 +58,7 @@ Attention weights are preserved to support downstream interpretability analyses.
 ---
 
 ## 3. Repository Structure
-
+```text
 BAT-AKI/
 ├── pretraining.py
 │
