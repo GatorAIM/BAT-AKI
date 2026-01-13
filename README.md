@@ -60,28 +60,39 @@ Attention weights are preserved to support downstream interpretability analyses.
 ## 3. Repository Structure
 ```text
 BAT-AKI/
-├── pretraining.py
+├── BAT_AKI_evaluate.py              # Main evaluation script
+├── BAT-AKI pretraining.py           # Main pretraining script
 │
-├── model/
-│   ├── mlm_model.py
-│   ├── classifier_model.py
-│   └── loss.py
+├── configs/                         # Configuration files
+│   └── pretrain_config.py          # Pretraining configuration
 │
-├── dataset/
-│   ├── masked_ehr_dataset.py
-│   ├── downstream_dataset.py
-│   └── load_data.py
+├── dataset/                         # Dataset handling modules
+│   ├── downstream_dataset.py       # Downstream task dataset
+│   ├── handle_matrix.py            # Matrix handling utilities
+│   ├── load_data.py                # Data loading functions
+│   └── masked_ehr_dataset.py      # Masked EHR dataset implementation
 │
-├── utils/
-│   ├── handle_matrix.py
-│   ├── evaluation.py
-│   └── lr_scheduler.py
+├── model/                           # Model definitions
+│   ├── classifier_model.py         # Classification model
+│   └── mlm_model.py                # Masked Language Model
 │
-├── notebooks/
-│   ├── Step1_Pretrain_Proposed.ipynb
-│   ├── Step2_Finetune_Proposed.ipynb
-│   ├── Step3_Baseline.ipynb
-│   └── ATT_visualization.ipynb
+├── piplines/                        # Pipeline modules
+│   ├── __init__.py
+│   ├── datasets.py                 # Dataset utilities
+│   ├── finetune.py                 # Fine-tuning functions
+│   ├── load_pretrained.py          # Load pretrained models
+│   ├── mask_eval.py                # Mask evaluation
+│   ├── metrics.py                  # Metrics calculation
+│   ├── resources.py                # Resource loading
+│   ├── semantic.py                 # Semantic processing
+│   └── train_mlm.py                # MLM training
 │
-├── requirements.txt
-└── README.md
+├── static files/                    # Static configuration files
+│   ├── focus_tokens.json           # Focus tokens configuration
+│   └── ignore_prefixes.json        # Ignore prefixes configuration
+│
+└── utils/                           # Utility functions
+    ├── build_selected_tokens.py    # Token selection builder
+    ├── evaluation.py                # Evaluation utilities
+    └── loss.py                      # Loss functions
+```
