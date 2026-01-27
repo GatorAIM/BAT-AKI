@@ -1,0 +1,31 @@
+{
+  "LOAD_MAP": {
+    "vital_DIASTOLIC_avg": "vital_DIASTOLIC_avg.pkl",
+    "vital_SYSTOLIC_avg": "vital_SYSTOLIC_avg.pkl",
+    "vital_WT_avg": "vital_WT_avg.pkl",
+    "vital_HT_avg": "vital_HT_avg.pkl",
+    "labcat": "labcat.pkl",
+    "labnum": "labnum.pkl",
+    "px": "px.pkl",
+    "amed": "amed.pkl",
+    "dx": "dx.pkl",
+    "demo": "demo.pkl"
+  },
+  "TABLE_CONFIG": {
+    "vital_DIASTOLIC_avg": {"code_col": "DIASTOLIC_str", "date_col": "MEASURE_DATE"},
+    "vital_SYSTOLIC_avg": {"code_col": "SYSTOLIC_str", "date_col": "MEASURE_DATE"},
+    "vital_WT_avg": {"code_col": "WT_str", "date_col": "MEASURE_DATE"},
+    "vital_HT_avg": {"code_col": "HT_str", "date_col": "MEASURE_DATE"},
+    "labcat": {"code_col": "LAB_LOINC_TF", "date_col": "SPECIMEN_DATE"},
+    "labnum": {"code_col": "LAB_LOINC_NUM", "date_col": "SPECIMEN_DATE"},
+    "px": {"code_col": "PX", "date_col": "PX_DATE"},
+    "dx": {"code_col": "DX", "date_col": "DX_DATE"},
+    "amed": {"code_col": "MEDADMIN_CODE", "date_col": "MEDADMIN_START_DATE"}
+  },
+  "EXCLUDE_DX_CODES": [
+    "DX:09:IMO>6",
+    "DX:09:IMO<6",
+    "DX:09:NoD>6",
+    "DX:09:NoD<6"
+  ]
+}
