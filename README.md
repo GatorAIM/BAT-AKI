@@ -92,7 +92,13 @@ BAT-AKI/
 │   └── ignore_prefixes.json        # Ignore prefixes configuration
 │
 └── utils/                           # Utility functions
-    ├── build_selected_tokens.py    # Token selection builder
-    ├── evaluation.py                # Evaluation utilities
-    └── loss.py                      # Loss functions
+│   ├── build_selected_tokens.py    # Token selection builder
+│   ├── evaluation.py                # Evaluation utilities
+│   └── loss.py                      # Loss functions
+│
+└── ablation_study/                    # Ablation study (your ablation_study files)
+    ├── ablation_study.py            # Ablation study main script
+    ├── dataset/                     # Copied dataset modules for ablation
+    ├── model/                       # Copied model modules for ablation
+    └── utils/                       # Copied utils for ablation
 ```
