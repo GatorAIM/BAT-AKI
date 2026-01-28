@@ -96,9 +96,24 @@ BAT-AKI/
 │   ├── evaluation.py                # Evaluation utilities
 │   └── loss.py                      # Loss functions
 │
+├── baseline/                        # Baseline model implementations
+│   ├── run_lstm.py                 # LSTM baseline model
+│   ├── run_retain.py               # RETAIN baseline model
+│   ├── run_transformer.py          # Transformer baseline model
+│   ├── run_XGboost.py              # XGBoost baseline model
+│   ├── run_preprocessing.py        # Data preprocessing for baselines
+│   └── function/                   # Baseline utility functions
+│       ├── __init__.py
+│       ├── preprocessing.py        # Preprocessing utilities
+│       ├── lstm_func.py            # LSTM helper functions
+│       ├── retain_func.py          # RETAIN helper functions
+│       ├── transformer_func.py     # Transformer helper functions
+│       ├── xgboost_func.py         # XGBoost helper functions
+│       └── preprecessing_parameters.jason  # Preprocessing parameters
+│
 └── ablation_study/                    # Ablation study (your ablation_study files)
     ├── ablation_study.py            # Ablation study main script
-    ├── dataset/                     # Copied dataset modules for ablation
-    ├── model/                       # Copied model modules for ablation
-    └── utils/                       # Copied utils for ablation
+    ├── dataset/                     # dataset modules for ablation
+    ├── model/                       # model modules for ablation
+    └── utils/                       # utils for ablation
 ```
